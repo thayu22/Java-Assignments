@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class BooleanTest {
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
-        
+
         System.out.print("Enter boolean A: ");
         boolean A = input.nextBoolean();
         System.out.print("Enter boolean B: ");
