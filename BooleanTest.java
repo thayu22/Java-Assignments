@@ -5,16 +5,16 @@ public class BooleanTest {
         Scanner input = new Scanner(System.in);
 
         System.out.print("Enter boolean A: ");
-        boolean A = input.nextBoolean();
+        boolean a = input.nextBoolean();
         System.out.print("Enter boolean B: ");
-        boolean B = input.nextBoolean();
+        boolean b = input.nextBoolean();
         System.out.print("Enter boolean C: ");
-        boolean C = input.nextBoolean();
+        boolean c = input.nextBoolean();
         System.out.print("Enter boolean D: ");
-        boolean D = input.nextBoolean();
+        boolean d = input.nextBoolean();
         input.close();
 
-        boolean a = (B && !D) || (!B && !C && D) || (!A && !B && !C) || (A && C && !D);
+        boolean finaValue = B && !D || !B && !C && D || !A && !B && !C || A && C && !D;
 
         System.out.println("a is: " + a);
     }
