@@ -1,0 +1,192 @@
+import java.util.Scanner;
+
+public class TicTacToe {
+    static char[][] board = new char[3][3];
+
+    public static void createBoard() {
+        char number = '1';
+        for (int r = 0; r < board.length; r++) {
+            System.out.print(" | ");
+            for (int c = 0; c < board[r].length; c++) {
+                board[r][c] = number;
+                number++;
+                System.out.print(" " + board[r][c] + " | ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printBoard() {
+        for (int r = 0; r < board.length; r++) {
+            System.out.print("| ");
+            for (int c = 0; c < board[r].length; c++) {
+                System.out.print(board[r][c] + " | ");
+            }
+            System.out.println();
+        }
+    }
+
+    static boolean isPlayer1 = true;
+
+    static char exOrO;
+
+    public static char playerDecisionMaker() {
+        if (isPlayer1) {
+            exOrO = 'X';
+        } else {
+            exOrO = 'O';
+        }
+        return exOrO;
+    }
+
+    static boolean gameOver = false;
+
+    public static boolean winChecker() {
+        for (int r = 0; r < 3; r++) {
+            if (board[r][0] == exOrO && board[r][1] == exOrO && board[r][2] == exOrO) {
+                gameOver = true;
+                return true;
+            }
+        }
+
+        for (int c = 0; c < 3; c++) {
+            if (board[0][c] == exOrO && board[1][c] == exOrO && board[2][c] == exOrO) {
+                gameOver = true;
+                return true;
+            }
+        }
+
+        if (board[0][0] == exOrO && board[1][1] == exOrO && board[2][2] == exOrO) {
+
+            gameOver = true;
+            return true;
+        }
+        if (board[0][2] == exOrO && board[1][1] == exOrO && board[2][0] == exOrO) {
+
+            gameOver = true;
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean drawChecker() {
+        for (int i = 0; i < 3; i++) {
+            for (int s = 0; s < 3; s++) {
+                if (board[i][s] != 'X' && board[i][s] != 'O') {
+                    return false;
+                }
+            }
+        }
+
+        if (!winChecker()) {
+            gameOver = true;
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean placeChecker(int hor, int vert) {
+        if (board[hor][vert] == 'X' || board[hor][vert] == 'O') {
+            System.out.println("This spot is taken");
+            return true;
+        }
+        return false;
+    }
+
+    public static void welcome() {
+        System.out.println("This is a TicTacToe game.");
+        System.out.println("    Players can choose a spot to decide their");
+        System.out.println("    move and enter the number in that spot to place a move.");
+        System.out.println("                Good Luck!");
+        System.out.println("*******************************");
+        System.out.println();
+    }
+
+    public static void main(String[] args) throws Exception {
+        welcome();
+        Scanner input = new Scanner(System.in);
+        createBoard();
+        System.out.println("Please enter a number to make a move: ");
+        String userInput = input.next();
+        char move = userInput.charAt(0);
+        while (!gameOver) {
+
+            switch (move) {
+                case '1':
+                    if (!placeChecker(0, 0)) {
+                        board[0][0] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '2':
+                    if (!placeChecker(0, 1)) {
+                        board[0][1] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '3':
+                    if (!placeChecker(0, 2)) {
+                        board[0][2] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '4':
+                    if (!placeChecker(1, 0)) {
+                        board[1][0] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '5':
+                    if (!placeChecker(1, 1)) {
+                        board[1][1] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '6':
+                    if (!placeChecker(1, 2)) {
+                        board[1][2] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '7':
+                    if (!placeChecker(2, 0)) {
+                        board[2][0] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '8':
+                    if (!placeChecker(2, 1)) {
+                        board[2][1] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                case '9':
+                    if (!placeChecker(2, 2)) {
+                        board[2][2] = playerDecisionMaker();
+                        isPlayer1 = !isPlayer1;
+                    }
+                    break;
+                default:
+                    System.out.println("Invalid move. Please try again.");
+                    if (move > '9' || move < '1') {
+                        System.out.println("Please enter number from 1 to 9:");
+                    }
+                    isPlayer1 = !isPlayer1;
+                    break;
+            }
+
+            printBoard();
+            if (winChecker()) {
+                System.out.println(exOrO + " Wins!");
+                break;
+            } else if (drawChecker()) {
+                System.out.println("It's a draw! Good game.");
+                gameOver = true;
+                break;
+            } else {
+                System.out.println("Please enter a number to make a move: ");
+                move = input.next().charAt(0);
+            }
+        }
+    }
+}
