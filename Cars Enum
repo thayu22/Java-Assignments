@@ -1,0 +1,53 @@
+public enum Cars {
+
+	SSC_THRUST(110000, 633, 8600),
+	KOENIGSEGG_JETSKO_ABSOLUT(1600, 330, 3064),
+	BUGATTI_CHIRON(1480, 261, 4398),
+	DODGE_DEMON(1025, 215, 4275),
+	LAMBORGHINI_AVENTADOR(780, 217, 3472),
+	ASTON_MARTIN_ONE(750, 220, 3594),
+	PORSCHE(533, 200, 3536),
+	FERRARI(471, 200, 2425),
+	BMW_GTR(444, 152, 2976),
+	TOYOTA_SUPRA(382, 155, 3215),
+	CIVIC(143, 112, 2811),
+	RENAULT_TWIZY(5, 28, 1045);
+
+	private double horsePower;
+	private double topSpeed;
+	private double mass;
+
+	Cars(double horsePower, double topSpeed, double mass) {
+		this.horsePower = horsePower;
+		this.topSpeed = topSpeed;
+		this.mass = mass;
+	}
+
+	public double getHorsePower() {
+		return horsePower;
+	}
+
+	public double getTopSpeed() {
+		return topSpeed;
+	}
+
+	public double getMass() {
+		return mass;
+	}
+
+	public double getPowerToWeightRatio() {
+		return horsePower / mass;
+	}
+
+	public double getPower() {
+		return horsePower * 745.7;
+	}
+
+	public double getForce(double speed) {
+		return getPower() / speed;
+	}
+
+	public double getAcceleration(double speed) {
+		return getPower() / (mass * speed);
+	}
+}
